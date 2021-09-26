@@ -1,13 +1,15 @@
 {% extends 'registration/base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="container col-8">
+<div class="container col-5">
 <div class="card">
-<div class="card-header align-center">User Login</div>
+<div class="card-header align-center" style="text-align:center;"><h2>User Login</h2></div>
 <div class="card-body">
-<form method="post" action="">
+<form method="post" action="/accounts/login/">
 {% csrf_token %}
 {%bootstrap_form form%}
+<p> New user? <a href="/accounts/register/">Register</a></p>
+<button class="btn btn-success">Login</button>
 </form>
 </div>
 </div>
