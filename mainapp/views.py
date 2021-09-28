@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     title="HomePage"
     hood=request.user.profile.hood
-    print(hood)
     posts=Alert.objects.filter(hood_id=hood)
     category=Category.objects.all()
     
@@ -18,7 +17,7 @@ def index(request):
 def addpost(request):
     if request.method=='POST':
         form=AlertForm(request.POST,request.FILES)
-        print(form.errors)
+       
         if form.is_valid():
             print("valid")
             form.save(commit=False)
@@ -58,10 +57,10 @@ def business(request):
 def search(request):
     if request.method=="POST":
         name=request.POST.get('businessname')
-        print(name)
+       
         biz=Business.objects.filter(name__icontains=name)
     
     return render(request,'search.html',{"results":biz,'term':name})
 def logout(request):
     auth.logout(request)
-    return redirect('index')
+    return redirect('register')

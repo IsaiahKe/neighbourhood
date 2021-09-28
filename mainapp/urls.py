@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^accounts/register/',RegistrationView.as_view(success_url='/accounts/login/'),name="register"),
     url(r'^accounts/',include('django.contrib.auth.urls')),
     url(r'^accounts/login/',LoginView, name="login"),
+    url(r'^accounts/logout/',LogoutView.as_view(),name='logout'),
     url(r'^addpost/$',views.addpost,name="addpost"),
     url(r'^profileupdate/(\d)',views.updateprofile,name='updateprofile'),
     url(r'^business/',views.business,name="business"),

@@ -21,7 +21,7 @@
         <div class="row"><a href="/profileupdate/{{user.id}}/"><button class="btn btn-default">Set profile</button></a></div>
         <h3>User options</h3>
         {% if user.is_authenticated %}
-        <div class="row"><a href="/logout/"><button class="btn btn-default">Logout</button></a></div>
+        <div class="row"><a href="accounts/logout/"><button class="btn btn-default">Logout</button></a></div>
         <div class="row"><a href="/delete/{{user.id}}/"><button class="btn btn-default">Delete account</button></a></div>
         {% else %}
         <div class="row"><a href="/accounts/login/"><button class="btn btn-default">Set profile</button></a></div>
