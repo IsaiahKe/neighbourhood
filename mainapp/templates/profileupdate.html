@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container" style='display:flex;flex-direction:row;'>
+<div class="col-4">
+<div class="card" style="padding:0px;border:none;">
+<div class="card-header" style="text-align:center;"><h2>Change Profile</h2></div>
+<div class="card-body">
+<div class="" style='height:200px;width:200px;margin-bottom:10px;'>
+<img src="{{user.profile.photo.url}}" width='200px' height='200px' />
+</div>
+
+</div>
+</div>
+</div>
+<div class="col-6">
+<div class="card">
+<div class="card-header" style="text-align:center;"><h2>User Information</h2></div>
+<div class="card-body">
+<form method="post" action="" enctype='multipart/form-data'>
+{%csrf_token%}
+{%bootstrap_form userinfo %}
+{%bootstrap_form form %}
+<input type="submit" class="btn btn-success" value="Update User"/>
+</form>
+</div>
+</div>
+
+</div>
+</div>
+{% endblock %}
