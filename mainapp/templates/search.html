@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container-fluid" style="text-align:center;"><h3>Searched business containing {{term}}</h3></div>
+<div class="container" style="display:flex;flex-direction:row;wrap-content:wrap;justify-content:space-around;">
+{% for result in results %}
+<div class="card col-4" style="margin-bottom:20px;">
+<div class="card-header">
+<span style="font-weight:bold"> Business Name:{{result.name}}</span>
+</div>
+<div class="card-body">
+<div class="row">Email Address: {{result.email}}</div>
+<div class="row">Contact: {{result.contact}}</div>
+<div class="row">Location: {{result.location}}</div>
+</div>
+<div class="card-footer"></div>
+</div>
+</div>
+{%empty%}
+No Business Found
+{% endfor %}
+</div>
+{% endblock  %}
