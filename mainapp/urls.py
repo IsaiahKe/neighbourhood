@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^profileupdate/(\d)',views.updateprofile,name='updateprofile'),
     url(r'^business/',views.business,name="business"),
     url(r'^facility/(\d)/',views.facility,name='facility'),
-    url(r'^search/',views.search,name="serach"),
+    url(r'^search/',views.search,name="search"),
 ]
 
