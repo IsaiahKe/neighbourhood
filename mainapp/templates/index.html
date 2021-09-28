@@ -1,19 +1,102 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load bootstrap_icons %}
 {% block content %}
 <div class="container-fluid">
-<div class="card col-2" style="z-index:5;width:display:inline;height:96%;position:absolute;display:none;">
+<div class="card col-2" style="z-index:5;min-width:fit-content;display:inline;height:86%;position:absolute;display:none;margin-top:100px;" id="nav">
     <div class="card-header">
         <div class="row">
             <div class="col-9"><h3>MENU</h3></div>
-            <div class="col-3" style="background:red;color:white;text-align:center;font-weight:bold;cursor:pointer">X</div>
+            <div class="col-3" onclick="closemenu();" style="color:red;text-align:center;font-weight:bold;cursor:pointer">{%bs_icon 'caret-left' size='2em'%}</div>
         </div>
         <hr>
-        <div class="card-body">
-        Home
+        <div class="card-body" style="height:inherit;">
+        <h3>Facilities</h3>
+        {% for category  in categories%}
+        <div class="row"><a href="/facility/{{category.id}}/"><button class="btn btn-default">{{category.name}}</button></a></div>{% endfor %}
+        <h4>Commerce</h4>
+        <div class="row"><a href="/business/"><button class="btn btn-default">Business</button></a></div>
+        <h3>User Settings</h3>
+        <div class="row"><a href="/addpost/"><button class="btn btn-default">Add Post</button></a></div>
+        <div class="row"><a href="/profileupdate/{{user.id}}/"><button class="btn btn-default">Set profile</button></a></div>
+        <h3>User options</h3>
+        {% if user.is_authenticated %}
+        <div class="row"><a href="/logout/"><button class="btn btn-default">Logout</button></a></div>
+        <div class="row"><a href="/delete/{{user.id}}/"><button class="btn btn-default">Delete account</button></a></div>
+        {% else %}
+        <div class="row"><a href="/accounts/login/"><button class="btn btn-default">Set profile</button></a></div>
+        {% endif %}
         </div>
     </div>
 </div>
-<div class="card" style="position:relative;">
-<duv class="card-body">card test</div></div></div>
+<div class="card" style="position:relative;border:none">
+<div class="card-body">
+<div class="row" style="display:flex;flex-direction:row;justify-content:space-between;">
+<div class="col-3">
+<div class="col-1">
+<div class="col-sm-1" onclick="showmenu();" style="cursor:pointer;" id="menu">{%bs_icon 'list' size='2em'%}</div>
+
+</div>
+
+</div>
+<div class="col-5"><h1>HOODEXPLORE</h2></div>
+<div class="col-4" style="display:flex;flex-direction:row-reverse;">
+<div class="col-sm-1"><a href="/profileupdate/{{user.id}}/"><div class="avatar rounded-circle" style="border:1px solid;height:60px;width:60px;background-image:url({{user.profile.photo.url}});background-size:cover;background-repeat:">
+</div>
+</a></div>
+
+</div>
+
+</div>
+</div>
+
+</div></div></div>
+<hr/>
+<div class="container">
+{% if posts %}
+<div class="row">
+<span style="font-weight:bold"><h2>Posts in {{hood}}</h2></span>
+</div>
+{% for post in posts %}
+{% if post.image %}
+<div class="card" style='min-width:fit-content;height:fit-content;max-height:fit-content;margin-bottom:20px;'>
+<div class="card-body" style="min-height:400px;width:100%;padding:0px;overflow-x: hidden;">
+
+<div class="row" style="padding:20px;"><img src="{{post.image.url}}" height='250px',width='250px' class="image-responsive"/></div>
+<div class="row"style="padding:20px;min-width:fit-content;min-height:fit-content;max-height:fit-content;">{{post.content}}</div>
+</div>
+
+
+<div class="card-footer" style="display:flex;justify-content:space-between;flex-direction:row;"><div class="row" style="">{{post.posted}}</div><div class="">{{post.author.username}}</div>
+</div>
+
+</div>
+{% else %}
+<div class="card" style='min-width:fit-content;height:fit-content;max-height:fit-content;'>
+<div class="card-body" style="min-height:400px;width:100%;padding:0px;overflow-x: hidden;">
+<div class="row" style="height:300px;display:flex;flex-direction:row;">
+<div class="col-12" style="padding:10px;min-width:fit-content;min-height:fit-content;max-height:fit-content;">{{post.content}}</div>
+</div>
+
+</div>
+<div class="card-footer" style="display:flex;justify-content:space-between;flex-direction:row;">
+<div class="row" style="">{{post.posted}}</div><div class="">{{post.author.username}}</div>
+</div>
+
+</div>
+{% endif %}
+{% endfor %}{% endif %}
+</div>
 {% endblock %}
+{% block scripts %}
+  <script>
+  function showmenu(){
+    document.getElementById('menu').style.display="none"
+    document.getElementById('nav').style.display='block'
+  }
+  function closemenu(){
+        document.getElementById('nav').style.display="none"
+        document.getElementById('menu').style.display='block'
+  }
+     </script>
+{% endblock  %}
