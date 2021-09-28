@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+<h3>{{facility.name}} facility Information</h3>
+{% for post in  posts%}
+<div class="card">
+<div class="card-body">
+{{post.content}}
+</div>
+<div class="card-footer">
+<div class="row">
+ 
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% endblock  %}
